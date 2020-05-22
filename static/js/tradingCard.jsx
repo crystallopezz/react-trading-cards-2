@@ -22,15 +22,15 @@ class TradingCard extends React.Component {
   render() {
     return (
       <div className="card">
-        <p class="card-name">
+        <p className="card-name">
           Name: {this.props.name}
         </p>
 
-        <div class="card-img">
+        <div className="card-img">
           <img src={this.props.imgUrl} />
         </div>
 
-        <p class="card-details">
+        <p className="card-details">
           Skill: {this.props.skill}
         </p>
       </div>
@@ -39,13 +39,36 @@ class TradingCard extends React.Component {
 }
 
 class TradingCardContainer extends React.Component {
+  constructor(){
+    super();
+
+    this.state = {cards: []}; //set initial value
+    this.updateCards = this.updateCards.bind(this);
+  }
+
+  updateCards() {
+    const floatCard = {
+      name: 'Float',
+      skill: 'baking pretzels',
+      imgUrl: '/static/img/float.jpg'
+    };
+
+    this.setState({
+      cards: [floatCard]
+      });
+    };
+
+  componentDidMount() {
+    this.updateCards();
+  }
+
   render() {
     const tradingCards = [];
 
-    for (const currentCard of tradingCardData) {
+    for (const currentCard of this.state.cards) {
       tradingCards.push(
         <TradingCard
-          key={currentCard.name}
+          className={currentCard.name}
           name={currentCard.name}
           skill={currentCard.skill}
           imgUrl={currentCard.imgUrl}
