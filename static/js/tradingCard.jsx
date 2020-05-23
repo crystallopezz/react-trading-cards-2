@@ -46,20 +46,24 @@ class TradingCardContainer extends React.Component {
     this.updateCards = this.updateCards.bind(this);
   }
 
-  updateCards() {
-    const floatCard = {
-      name: 'Float',
-      skill: 'baking pretzels',
-      imgUrl: '/static/img/float.jpg'
-    };
+  updateCards(response) {
+    // const floatCard = {
+    //   name: 'Float',
+    //   skill: 'baking pretzels',
+    //   imgUrl: '/static/img/float.jpg'
+    // };
 
     this.setState({
-      cards: [floatCard]
-      });
-    };
+      cards: response.cards
+    });
+  };
+
+  getAllCards() {
+    $.get('/api/cards', this.updateCards)
+  }
 
   componentDidMount() {
-    this.updateCards();
+    this.getAllCards();
   }
 
   render() {
